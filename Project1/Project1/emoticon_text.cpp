@@ -6,17 +6,21 @@ using namespace std;
 
 string IvedimasEmoticonas();
 string IvedimasSimboliai();
-string BeTarpu(string nice);
+//string BeTarpu(string nice);
+string MazRaides(string nice);
+void Spausdintuvas(char simb, string zodis, string whitespace, string Sriftas[5][3], int ind1, int ind2, int &x);
 void Skaiciuotuvas(string zodis, string whitespace, string A[5][3], string B[5][3], string C[5][3], string D[5][3], string E[5][3], string F[5][3], string G[5][3], string H[5][3], string I[5][3], string Y[5][3], string J[5][3], string K[5][3], string L[5][3], string M[5][3], string N[5][3], string O[5][3], string P[5][3], string R[5][3], string S[5][3], string T[5][3], string U[5][3], string V[5][3], string Z[5][3], string W[5][3], string Q[5][3], string X[5][3], string Kl[5][3], string Ts[5][3]);
 int main()
 {
-	string zodis, emoticonas, whitespace;
+	string zodis, emoticonas, whitespace, tzodis;
 
 
-	zodis = BeTarpu(IvedimasSimboliai());
+
+	zodis = MazRaides(IvedimasSimboliai());
 	emoticonas = IvedimasEmoticonas();
 	whitespace = "__"; //pakeisti jei norima kitokiu tustuma uzpildanciu simboliu
 
+	
 
 	string A[5][3] = { emoticonas,emoticonas,emoticonas,emoticonas,whitespace,emoticonas,emoticonas,emoticonas,emoticonas,emoticonas,whitespace,emoticonas,emoticonas,whitespace,emoticonas };
 	string B[5][3] = { emoticonas,emoticonas,whitespace,emoticonas,whitespace,emoticonas,emoticonas,emoticonas,whitespace,emoticonas,whitespace,emoticonas,emoticonas,emoticonas,whitespace };
@@ -50,11 +54,46 @@ int main()
 
 
 	Skaiciuotuvas(zodis, whitespace, A, B, C, D, E, F, G, H, I, Y, J, K, L, M, N, O, P, R, S, T, U, V, Z, W, Q, X, Kl, Ts);
+
 	
 
 	return 0;
 }
-string BeTarpu(string nice)
+void Spausdintuvas(char simb, string zodis, string whitespace, string Sriftas[5][3], int i, int j, int &x)
+{
+	if (simb == ' ')
+		cout << whitespace;
+	else
+	{
+		for (int k = 0; k < 3; k++) //3, nes sriftu dydis 5x3
+		{
+			if (x == 0 && k == 0)
+			{
+				cout << "." << Sriftas[i][k];
+				x = 1;
+			}
+			else if (x != 0 && k == 0)
+				cout << Sriftas[i][k];
+			if (k == 1 || k == 2)
+				cout << Sriftas[i][k];
+
+			if (zodis.length() - j != 1 && k == 2) //tarpai tarp simboliu
+				cout << whitespace;
+			if (zodis.length() - j == 1 && k == 2) //i eilutes pabaiga
+				cout << '\n' << '\n';
+		}
+	}
+}
+string MazRaides(string nice)
+{
+	string tzodis;
+	for (size_t i = 0; i < nice.length(); i++)
+	{
+		tzodis += char(tolower(nice[i]));
+	}
+	return tzodis;
+}
+/*string BeTarpu(string nice)
 {
 	string be_tarpu;
 
@@ -64,7 +103,7 @@ string BeTarpu(string nice)
 			be_tarpu += nice[i];
 	}
 	return be_tarpu;
-}
+}*/
 string IvedimasSimboliai()
 {
 	string nice;
@@ -93,565 +132,121 @@ void Skaiciuotuvas(string zodis, string whitespace, string A[5][3], string B[5][
 
 		for (size_t j = 0; j < zodis.length(); j++)
 		{
-			if (zodis[j] == 'a' || zodis[j] == 'A')
+			if (zodis[j] == 'a')
 			{
-				for (int k = 0; k < 3; k++) //3, nes sriftu dydis 5x3
-				{
-					if (x == 0 && k == 0)
-					{
-						cout << "." << A[i][k];
-						x = 1;
-					}
-					else if (x != 0 && k == 0)
-						cout << A[i][k];
-					if (k == 1 || k == 2)
-						cout << A[i][k];
-
-					if (zodis.length() - j != 1 && k == 2) //tarpai tarp simboliu
-						cout << whitespace;
-					if (zodis.length() - j == 1 && k == 2) //i eilutes pabaiga
-						cout << '\n' << '\n';
-				}
+				Spausdintuvas(zodis[j], zodis, whitespace, A, i, j, x);
 			}
-			if (zodis[j] == 'b' || zodis[j] == 'B')
+			if (zodis[j] == 'b')
 			{
-				for (int k = 0; k < 3; k++)
-				{
-					if (x == 0 && k == 0)
-					{
-						cout << "." << B[i][k];
-						x = 1;
-					}
-					else if (x != 0 && k == 0)
-						cout << B[i][k];
-					if (k == 1 || k == 2)
-						cout << B[i][k];
-
-					if (zodis.length() - j != 1 && k == 2)
-						cout << whitespace;
-					if (zodis.length() - j == 1 && k == 2)
-						cout << '\n' << '\n';
-				}
+				Spausdintuvas(zodis[j], zodis, whitespace, B, i, j, x);
 			}
-			if (zodis[j] == 'c' || zodis[j] == 'C')
+			if (zodis[j] == 'c')
 			{
-				for (int k = 0; k < 3; k++)
-				{
-					if (x == 0 && k == 0)
-					{
-						cout << "." << C[i][k];
-						x = 1;
-					}
-					else if (x != 0 && k == 0)
-						cout << C[i][k];
-					if (k == 1 || k == 2)
-						cout << C[i][k];
-
-					if (zodis.length() - j != 1 && k == 2)
-						cout << whitespace;
-					if (zodis.length() - j == 1 && k == 2)
-						cout << '\n' << '\n';
-				}
+				Spausdintuvas(zodis[j], zodis, whitespace, C, i, j, x);
 			}
-			if (zodis[j] == 'd' || zodis[j] == 'D')
+			if (zodis[j] == 'd')
 			{
-				for (int k = 0; k < 3; k++)
-				{
-					if (x == 0 && k == 0)
-					{
-						cout << "." << D[i][k];
-						x = 1;
-					}
-					else if (x != 0 && k == 0)
-						cout << D[i][k];
-					if (k == 1 || k == 2)
-						cout << D[i][k];
-
-					if (zodis.length() - j != 1 && k == 2)
-						cout << whitespace;
-					if (zodis.length() - j == 1 && k == 2)
-						cout << '\n' << '\n';
-				}
+				Spausdintuvas(zodis[j], zodis, whitespace, D, i, j, x);
 			}
-			if (zodis[j] == 'e' || zodis[j] == 'E')
+			if (zodis[j] == 'e')
 			{
-				for (int k = 0; k < 3; k++)
-				{
-					if (x == 0 && k == 0)
-					{
-						cout << "." << E[i][k];
-						x = 1;
-					}
-					else if (x != 0 && k == 0)
-						cout << E[i][k];
-					if (k == 1 || k == 2)
-						cout << E[i][k];
-
-					if (zodis.length() - j != 1 && k == 2)
-						cout << whitespace;
-					if (zodis.length() - j == 1 && k == 2)
-						cout << '\n' << '\n';
-				}
+				Spausdintuvas(zodis[j], zodis, whitespace, E, i, j, x);
 			}
-			if (zodis[j] == 'f' || zodis[j] == 'F')
+			if (zodis[j] == 'f')
 			{
-				for (int k = 0; k < 3; k++)
-				{
-					if (x == 0 && k == 0)
-					{
-						cout << "." << F[i][k];
-						x = 1;
-					}
-					else if (x != 0 && k == 0)
-						cout << F[i][k];
-					if (k == 1 || k == 2)
-						cout << F[i][k];
-
-					if (zodis.length() - j != 1 && k == 2)
-						cout << whitespace;
-					if (zodis.length() - j == 1 && k == 2)
-						cout << '\n' << '\n';
-				}
+				Spausdintuvas(zodis[j], zodis, whitespace, F, i, j, x);
 			}
-			if (zodis[j] == 'g' || zodis[j] == 'G')
+			if (zodis[j] == 'g')
 			{
-				for (int k = 0; k < 3; k++)
-				{
-					if (x == 0 && k == 0)
-					{
-						cout << "." << G[i][k];
-						x = 1;
-					}
-					else if (x != 0 && k == 0)
-						cout << G[i][k];
-					if (k == 1 || k == 2)
-						cout << G[i][k];
-
-					if (zodis.length() - j != 1 && k == 2)
-						cout << whitespace;
-					if (zodis.length() - j == 1 && k == 2)
-						cout << '\n' << '\n';
-				}
+				Spausdintuvas(zodis[j], zodis, whitespace, G, i, j, x);
 			}
-			if (zodis[j] == 'h' || zodis[j] == 'H')
+			if (zodis[j] == 'h')
 			{
-				for (int k = 0; k < 3; k++)
-				{
-					if (x == 0 && k == 0)
-					{
-						cout << "." << H[i][k];
-						x = 1;
-					}
-					else if (x != 0 && k == 0)
-						cout << H[i][k];
-					if (k == 1 || k == 2)
-						cout << H[i][k];
-
-					if (zodis.length() - j != 1 && k == 2)
-						cout << whitespace;
-					if (zodis.length() - j == 1 && k == 2)
-						cout << '\n' << '\n';
-				}
+				Spausdintuvas(zodis[j], zodis, whitespace, H, i, j, x);
 			}
-			if (zodis[j] == 'i' || zodis[j] == 'I')
+			if (zodis[j] == 'i')
 			{
-				for (int k = 0; k < 3; k++)
-				{
-					if (x == 0 && k == 0)
-					{
-						cout << "." << I[i][k];
-						x = 1;
-					}
-					else if (x != 0 && k == 0)
-						cout << I[i][k];
-					if (k == 1 || k == 2)
-						cout << I[i][k];
-
-					if (zodis.length() - j != 1 && k == 2)
-						cout << whitespace;
-					if (zodis.length() - j == 1 && k == 2)
-						cout << '\n' << '\n';
-				}
+				Spausdintuvas(zodis[j], zodis, whitespace, I, i, j, x);
 			}
-			if (zodis[j] == 'y' || zodis[j] == 'Y')
+			if (zodis[j] == 'y')
 			{
-				for (int k = 0; k < 3; k++)
-				{
-					if (x == 0 && k == 0)
-					{
-						cout << "." << Y[i][k];
-						x = 1;
-					}
-					else if (x != 0 && k == 0)
-						cout << Y[i][k];
-					if (k == 1 || k == 2)
-						cout << Y[i][k];
-
-					if (zodis.length() - j != 1 && k == 2)
-						cout << whitespace;
-					if (zodis.length() - j == 1 && k == 2)
-						cout << '\n' << '\n';
-				}
+				Spausdintuvas(zodis[j], zodis, whitespace, Y, i, j, x);
 			}
-			if (zodis[j] == 'j' || zodis[j] == 'J')
+			if (zodis[j] == 'j')
 			{
-				for (int k = 0; k < 3; k++)
-				{
-					if (x == 0 && k == 0)
-					{
-						cout << "." << J[i][k];
-						x = 1;
-					}
-					else if (x != 0 && k == 0)
-						cout << J[i][k];
-					if (k == 1 || k == 2)
-						cout << J[i][k];
-
-					if (zodis.length() - j != 1 && k == 2)
-						cout << whitespace;
-					if (zodis.length() - j == 1 && k == 2)
-						cout << '\n' << '\n';
-				}
+				Spausdintuvas(zodis[j], zodis, whitespace, J, i, j, x);
 			}
-			if (zodis[j] == 'k' || zodis[j] == 'K')
+			if(zodis[j] == 'k')
 			{
-				for (int k = 0; k < 3; k++)
-				{
-					if (x == 0 && k == 0)
-					{
-						cout << "." << K[i][k];
-						x = 1;
-					}
-					else if (x != 0 && k == 0)
-						cout << K[i][k];
-					if (k == 1 || k == 2)
-						cout << K[i][k];
-
-					if (zodis.length() - j != 1 && k == 2)
-						cout << whitespace;
-					if (zodis.length() - j == 1 && k == 2)
-						cout << '\n' << '\n';
-				}
+				Spausdintuvas(zodis[j], zodis, whitespace, K, i, j, x);
 			}
-			if (zodis[j] == 'l' || zodis[j] == 'L')
+			if (zodis[j] == 'l')
 			{
-				for (int k = 0; k < 3; k++)
-				{
-					if (x == 0 && k == 0)
-					{
-						cout << "." << L[i][k];
-						x = 1;
-					}
-					else if (x != 0 && k == 0)
-						cout << L[i][k];
-					if (k == 1 || k == 2)
-						cout << L[i][k];
-
-					if (zodis.length() - j != 1 && k == 2)
-						cout << whitespace;
-					if (zodis.length() - j == 1 && k == 2)
-						cout << '\n' << '\n';
-				}
+				Spausdintuvas(zodis[j], zodis, whitespace, L, i, j, x);
 			}
-			if (zodis[j] == 'm' || zodis[j] == 'M')
+			if (zodis[j] == 'm')
 			{
-				for (int k = 0; k < 3; k++)
-				{
-					if (x == 0 && k == 0)
-					{
-						cout << "." << M[i][k];
-						x = 1;
-					}
-					else if (x != 0 && k == 0)
-						cout << M[i][k];
-					if (k == 1 || k == 2)
-						cout << M[i][k];
-
-					if (zodis.length() - j != 1 && k == 2)
-						cout << whitespace;
-					if (zodis.length() - j == 1 && k == 2)
-						cout << '\n' << '\n';
-				}
+				Spausdintuvas(zodis[j], zodis, whitespace, M, i, j, x);
 			}
-			if (zodis[j] == 'n' || zodis[j] == 'N')
+			if (zodis[j] == 'n')
 			{
-				for (int k = 0; k < 3; k++)
-				{
-					if (x == 0 && k == 0)
-					{
-						cout << "." << N[i][k];
-						x = 1;
-					}
-					else if (x != 0 && k == 0)
-						cout << N[i][k];
-					if (k == 1 || k == 2)
-						cout << N[i][k];
-
-					if (zodis.length() - j != 1 && k == 2)
-						cout << whitespace;
-					if (zodis.length() - j == 1 && k == 2)
-						cout << '\n' << '\n';
-				}
+				Spausdintuvas(zodis[j], zodis, whitespace, N, i, j, x);
 			}
-			if (zodis[j] == 'o' || zodis[j] == 'O')
+			if (zodis[j] == 'o')
 			{
-				for (int k = 0; k < 3; k++)
-				{
-					if (x == 0 && k == 0)
-					{
-						cout << "." << O[i][k];
-						x = 1;
-					}
-					else if (x != 0 && k == 0)
-						cout << O[i][k];
-					if (k == 1 || k == 2)
-						cout << O[i][k];
-
-					if (zodis.length() - j != 1 && k == 2)
-						cout << whitespace;
-					if (zodis.length() - j == 1 && k == 2)
-						cout << '\n' << '\n';
-				}
+				Spausdintuvas(zodis[j], zodis, whitespace, O, i, j, x);
 			}
-			if (zodis[j] == 'p' || zodis[j] == 'P')
+			if (zodis[j] == 'p')
 			{
-				for (int k = 0; k < 3; k++)
-				{
-					if (x == 0 && k == 0)
-					{
-						cout << "." << P[i][k];
-						x = 1;
-					}
-					else if (x != 0 && k == 0)
-						cout << P[i][k];
-					if (k == 1 || k == 2)
-						cout << P[i][k];
-
-					if (zodis.length() - j != 1 && k == 2)
-						cout << whitespace;
-					if (zodis.length() - j == 1 && k == 2)
-						cout << '\n' << '\n';
-				}
+				Spausdintuvas(zodis[j], zodis, whitespace, P, i, j, x);
 			}
-			if (zodis[j] == 'r' || zodis[j] == 'R')
+			if (zodis[j] == 'r')
 			{
-				for (int k = 0; k < 3; k++)
-				{
-					if (x == 0 && k == 0)
-					{
-						cout << "." << R[i][k];
-						x = 1;
-					}
-					else if (x != 0 && k == 0)
-						cout << R[i][k];
-					if (k == 1 || k == 2)
-						cout << R[i][k];
-
-					if (zodis.length() - j != 1 && k == 2)
-						cout << whitespace;
-					if (zodis.length() - j == 1 && k == 2)
-						cout << '\n' << '\n';
-				}
+				Spausdintuvas(zodis[j], zodis, whitespace, R, i, j, x);
 			}
-			if (zodis[j] == 's' || zodis[j] == 'S')
+			if (zodis[j] == 's')
 			{
-				for (int k = 0; k < 3; k++)
-				{
-					if (x == 0 && k == 0)
-					{
-						cout << "." << S[i][k];
-						x = 1;
-					}
-					else if (x != 0 && k == 0)
-						cout << S[i][k];
-					if (k == 1 || k == 2)
-						cout << S[i][k];
-
-					if (zodis.length() - j != 1 && k == 2)
-						cout << whitespace;
-					if (zodis.length() - j == 1 && k == 2)
-						cout << '\n' << '\n';
-				}
+				Spausdintuvas(zodis[j], zodis, whitespace, S, i, j, x);
 			}
-			if (zodis[j] == 't' || zodis[j] == 'T')
+			if (zodis[j] == 't')
 			{
-				for (int k = 0; k < 3; k++)
-				{
-					if (x == 0 && k == 0)
-					{
-						cout << "." << T[i][k];
-						x = 1;
-					}
-					else if (x != 0 && k == 0)
-						cout << T[i][k];
-					if (k == 1 || k == 2)
-						cout << T[i][k];
-
-					if (zodis.length() - j != 1 && k == 2)
-						cout << whitespace;
-					if (zodis.length() - j == 1 && k == 2)
-						cout << '\n' << '\n';
-				}
+				Spausdintuvas(zodis[j], zodis, whitespace, T, i, j, x);
 			}
-			if (zodis[j] == 'u' || zodis[j] == 'U')
+			if (zodis[j] == 'u')
 			{
-				for (int k = 0; k < 3; k++)
-				{
-					if (x == 0 && k == 0)
-					{
-						cout << "." << U[i][k];
-						x = 1;
-					}
-					else if (x != 0 && k == 0)
-						cout << U[i][k];
-					if (k == 1 || k == 2)
-						cout << U[i][k];
-
-					if (zodis.length() - j != 1 && k == 2)
-						cout << whitespace;
-					if (zodis.length() - j == 1 && k == 2)
-						cout << '\n' << '\n';
-				}
+				Spausdintuvas(zodis[j], zodis, whitespace, U, i, j, x);
 			}
-			if (zodis[j] == 'v' || zodis[j] == 'V')
+			if (zodis[j] == 'v')
 			{
-				for (int k = 0; k < 3; k++)
-				{
-					if (x == 0 && k == 0)
-					{
-						cout << "." << V[i][k];
-						x = 1;
-					}
-					else if (x != 0 && k == 0)
-						cout << V[i][k];
-					if (k == 1 || k == 2)
-						cout << V[i][k];
-
-					if (zodis.length() - j != 1 && k == 2)
-						cout << whitespace;
-					if (zodis.length() - j == 1 && k == 2)
-						cout << '\n' << '\n';
-				}
+				Spausdintuvas(zodis[j], zodis, whitespace, V, i, j, x);
 			}
-			if (zodis[j] == 'z' || zodis[j] == 'Z')
+			if (zodis[j] == 'z')
 			{
-				for (int k = 0; k < 3; k++)
-				{
-					if (x == 0 && k == 0)
-					{
-						cout << "." << Z[i][k];
-						x = 1;
-					}
-					else if (x != 0 && k == 0)
-						cout << Z[i][k];
-					if (k == 1 || k == 2)
-						cout << Z[i][k];
-
-					if (zodis.length() - j != 1 && k == 2)
-						cout << whitespace;
-					if (zodis.length() - j == 1 && k == 2)
-						cout << '\n' << '\n';
-				}
+				Spausdintuvas(zodis[j], zodis, whitespace, Z, i, j, x);
 			}
-			if (zodis[j] == 'w' || zodis[j] == 'W')
+			if (zodis[j] == 'w')
 			{
-				for (int k = 0; k < 3; k++)
-				{
-					if (x == 0 && k == 0)
-					{
-						cout << "." << W[i][k];
-						x = 1;
-					}
-					else if (x != 0 && k == 0)
-						cout << W[i][k];
-					if (k == 1 || k == 2)
-						cout << W[i][k];
-
-					if (zodis.length() - j != 1 && k == 2)
-						cout << whitespace;
-					if (zodis.length() - j == 1 && k == 2)
-						cout << '\n' << '\n';
-				}
+				Spausdintuvas(zodis[j], zodis, whitespace, W, i, j, x);
 			}
-			if (zodis[j] == 'q' || zodis[j] == 'Q')
+			if (zodis[j] == 'q')
 			{
-				for (int k = 0; k < 3; k++)
-				{
-					if (x == 0 && k == 0)
-					{
-						cout << "." << Q[i][k];
-						x = 1;
-					}
-					else if (x != 0 && k == 0)
-						cout << Q[i][k];
-					if (k == 1 || k == 2)
-						cout << Q[i][k];
-
-					if (zodis.length() - j != 1 && k == 2)
-						cout << whitespace;
-					if (zodis.length() - j == 1 && k == 2)
-						cout << '\n' << '\n';
-				}
+				Spausdintuvas(zodis[j], zodis, whitespace, Q, i, j, x);
 			}
-			if (zodis[j] == 'x' || zodis[j] == 'X')
+			if (zodis[j] == 'x')
 			{
-				for (int k = 0; k < 3; k++)
-				{
-					if (x == 0 && k == 0)
-					{
-						cout << "." << X[i][k];
-						x = 1;
-					}
-					else if (x != 0 && k == 0)
-						cout << X[i][k];
-					if (k == 1 || k == 2)
-						cout << X[i][k];
-
-					if (zodis.length() - j != 1 && k == 2)
-						cout << whitespace;
-					if (zodis.length() - j == 1 && k == 2)
-						cout << '\n' << '\n';
-				}
+				Spausdintuvas(zodis[j], zodis, whitespace, X, i, j, x);
 			}
 			if (zodis[j] == '?')
 			{
-				for (int k = 0; k < 3; k++)
-				{
-					if (x == 0 && k == 0)
-					{
-						cout << "." << Kl[i][k];
-						x = 1;
-					}
-					else if (x != 0 && k == 0)
-						cout << Kl[i][k];
-					if (k == 1 || k == 2)
-						cout << Kl[i][k];
-
-					if (zodis.length() - j != 1 && k == 2)
-						cout << whitespace;
-					if (zodis.length() - j == 1 && k == 2)
-						cout << '\n' << '\n';
-				}
+				Spausdintuvas(zodis[j], zodis, whitespace, Kl, i, j, x);
 			}
 			if (zodis[j] == '.')
 			{
-				for (int k = 0; k < 3; k++)
-				{
-					if (x == 0 && k == 0)
-					{
-						cout << "." << Ts[i][k];
-						x = 1;
-					}
-					else if (x != 0 && k == 0)
-						cout << Ts[i][k];
-					if (k == 1 || k == 2)
-						cout << Ts[i][k];
-
-					if (zodis.length() - j != 1 && k == 2)
-						cout << whitespace;
-					if (zodis.length() - j == 1 && k == 2)
-						cout << '\n' << '\n';
-				}
+				Spausdintuvas(zodis[j], zodis, whitespace, Ts, i, j, x);
+			}
+			if (zodis[j] == ' ')
+			{
+				Spausdintuvas(zodis[j], zodis, whitespace, Ts, i, j, x);
 			}
 		}
 	}
